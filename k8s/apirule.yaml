@@ -1,0 +1,23 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: django-demo
+  namespace: dev
+spec:
+  hosts:
+    - django-demo
+  service:
+    name: django-demo-service
+    port: 80
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /*
+      methods:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+        - HEAD
+        - OPTIONS
+      noAuth: true

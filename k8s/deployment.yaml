@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django-demo
+  namespace: dev
 spec:
   replicas: 1
   selector:
@@ -12,8 +13,11 @@ spec:
       labels:
         app: django-demo
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: django-demo
           image: ghcr.io/daniiar500/djangodemo_for_kyma_argocd:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
